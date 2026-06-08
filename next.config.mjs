@@ -6,10 +6,8 @@ const nextConfig = {
       { protocol: 'https', hostname: 'storage.efipay.com.br' },
     ],
   },
-  // Ajustado: serverExternalPackages agora está dentro de experimental
-  experimental: {
-    serverExternalPackages: ['efipay'],
-  },
+  // Como você está na versão 14.2+, ela deve ficar na raiz novamente:
+  serverExternalPackages: ['efipay'],
 };
 
 export default nextConfig;

@@ -55,10 +55,10 @@ export async function POST(req: Request) {
       .select('id, disponivel, nome')
       .in('id', produtoIds);
 
-    const indisponiveis = (prods ?? []).filter(p => !p.disponivel);
+    const indisponiveis = (prods ?? []).filter((p: any) => !p.disponivel);
     if (indisponiveis.length > 0) {
       return NextResponse.json(
-        { error: `Item(s) indisponível(is): ${indisponiveis.map(p => p.nome).join(', ')}` },
+        { error: `Item(s) indisponível(is): ${indisponiveis.map((p: any) => p.nome).join(', ')}` },
         { status: 422 }
       );
     }
