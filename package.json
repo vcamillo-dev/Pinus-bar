@@ -25,10 +25,12 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/node": "^20.19.42",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
+    "dotenv": "^17.4.2",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.15",
     "postcss": "^8.4.38",

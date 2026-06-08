@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Adicionado useEffect
 import { useRouter } from 'next/navigation';
 import { useCarrinho } from '@/context/CarrinhoContext';
 import FormCheckout from '@/components/checkout/FormCheckout';
@@ -21,8 +21,15 @@ export default function CheckoutPage() {
   const [pixData,  setPixData]  = useState<Pick<CriarPedidoResponse,'pix_copia_cola'|'pix_location'|'pix_imagem'> | null>(null);
   const [totalGeral, setTotalGeral] = useState(0);
 
+  // Corrigido: Redirecionamento seguro colocado dentro do useEffect
+  useEffect(() => {
+    if (carrinho.items.length === 0 && screen === 'form') {
+      router.replace('/');
+    }
+  }, [carrinho.items.length, screen, router]);
+
+  // Enquanto redireciona ou verifica no cliente, evita renderizar o formulário vazio
   if (carrinho.items.length === 0 && screen === 'form') {
-    router.replace('/');
     return null;
   }
 

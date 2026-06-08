@@ -69,9 +69,12 @@ export default function PixPayment({ pedidoId, total, pixCopiaECola, pixImagem, 
   }, [pedidoId]);
 
   async function copiar() {
-    await navigator.clipboard.writeText(pixCopiaECola);
-    setCopiado(true);
-    setTimeout(() => setCopiado(false), 2500);
+    // Proteção adicionada para garantir que a API do navegador esteja acessível
+    if (typeof window !== 'undefined' && navigator.clipboard) {
+      await navigator.clipboard.writeText(pixCopiaECola || '');
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 2500);
+    }
   }
 
   return (
@@ -116,9 +119,9 @@ export default function PixPayment({ pedidoId, total, pixCopiaECola, pixImagem, 
 
           <div className="font-serif font-bold text-forest text-3xl">{fmt(total)}</div>
 
-          {/* Código copia e cola */}
+          {/* Código copia e cola — Correção adicionada com fallback seguro de string vazia */}
           <div className="bg-pinus-bg rounded-lg px-3 py-2 font-mono text-[9px] text-wood break-all leading-relaxed">
-            {pixCopiaECola.substring(0, 120)}...
+            {(pixCopiaECola || '').substring(0, 120)}...
           </div>
 
           <button
